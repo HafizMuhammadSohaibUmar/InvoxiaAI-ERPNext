@@ -1,56 +1,75 @@
 # Invoxia AI for ERPNext
 
-**Privacy-first AI assistant for ERPNext/Frappe with voice, Urdu/English commands, permission-aware live ERP answers, and local/cloud AI deployment support.**
+**A privacy-first AI assistant layer for ERPNext/Frappe, designed for voice-enabled ERP navigation, live business answers, Urdu/English commands, and local or cloud deployment.**
 
-Invoxia AI is a custom Frappe app that adds an AI assistant layer on top of ERPNext without modifying ERPNext core. It is designed for small and growing businesses that want ERPNext plus a natural-language assistant for navigation, reporting, live business answers, and future safe ERP actions.
+Invoxia AI is a custom Frappe app that adds an assistant experience to ERPNext while keeping ERPNext core untouched. It is designed for businesses that want the operational strength of ERPNext with a more natural way to ask questions, move through screens, and interact with business data.
 
-> Package name: `nexova_ai`
-> Product name: **Invoxia AI**
-> ERP platform: **ERPNext / Frappe v15**
-> Architecture rule: **no ERPNext core edits, no Frappe core patches, no monkey patches**
+| Area | Details |
+| --- | --- |
+| Platform | ERPNext / Frappe v15 |
+| App package | `nexova_ai` |
+| Product name | Invoxia AI |
+| Integration model | Custom Frappe app only |
+| Core policy | No ERPNext core edits, no Frappe core patches, no monkey patches |
+| Deployment direction | Cloud hosted and local/private deployments |
 
 ---
 
-## Live Demo
+## Demo
 
 A hosted demo is available at:
 
 **https://invoxia.sohaib.systems**
 
-The demo site is intended for synthetic/sample ERP data only. Public credentials are intentionally not stored in this repository. If credentials are shared for evaluation, they should belong to a limited demo user, not the ERPNext Administrator account.
+The demo is configured with sample ERP data. Access should be provided through a restricted demo user so visitors can test the assistant without administrative control over the ERPNext site.
 
-Recommended demo-user policy:
+Recommended demo account format:
 
-- Use a dedicated `demo@invoxia.sohaib.systems` account.
-- Keep permissions limited to demo-safe roles.
-- Do not expose System Manager or Administrator access publicly.
-- Reset demo data and credentials regularly.
+```text
+demo@invoxia.sohaib.systems
+```
 
----
-
-## Why This Project Exists
-
-ERPNext is powerful, but many small businesses struggle with ERP workflows, terminology, reports, and navigation. Invoxia AI explores how an AI assistant can make ERPNext easier to operate while respecting business data privacy and ERP permissions.
-
-The long-term goal is to support two customer models from one codebase:
-
-1. **Cloud hosted**: managed ERPNext + Invoxia AI, backups, monitoring, updates, and online subscription control.
-2. **Local/private deployment**: ERPNext + Invoxia AI + local STT/LLM services running on the client machine or office server, for clients who do not want business data leaving their premises.
+The demo account should not have Administrator or System Manager access.
 
 ---
 
-## What Invoxia AI Can Do Today
+## Product Vision
 
-### Floating ERPNext Desk Assistant
+Invoxia AI is being built for two deployment models:
 
-- Adds a bottom-right **Invoxia AI** launcher inside ERPNext Desk.
-- Opens an assistant panel without requiring a separate workspace.
-- Works as a custom app asset loaded through Frappe hooks.
-- Keeps ERPNext core untouched.
+1. **Cloud hosted ERPNext + Invoxia AI**
+   - Managed hosting
+   - HTTPS/domain setup
+   - backups and updates
+   - online subscription controls
+   - easier remote support
 
-### Text Commands
+2. **Local/private ERPNext + Invoxia AI**
+   - Runs on a client PC, office server, or private LAN
+   - local database and files
+   - optional local STT and local LLM services
+   - suitable for privacy-sensitive clients
+   - designed so business data can remain on premises
 
-Users can ask ERP-related questions and commands such as:
+The long-term goal is one assistant codebase that can support small clients with a few users and larger clients that use more ERPNext modules over time.
+
+---
+
+## Core Capabilities
+
+### Floating Assistant Inside ERPNext Desk
+
+Invoxia AI loads as a global ERPNext Desk assistant:
+
+- bottom-right floating launcher
+- assistant panel inside normal ERPNext screens
+- no separate workspace required for daily use
+- loaded through standard Frappe app assets
+- works as an add-on app without changing ERPNext core
+
+### Natural-Language ERP Commands
+
+The assistant supports text commands for ERP workflows, including examples such as:
 
 ```text
 today's sales
@@ -63,21 +82,25 @@ open supplier list
 low stock items dikhao
 ```
 
-### Voice Input Foundation
+### Voice Interaction Foundation
 
-- Browser voice input support.
-- Persistent microphone toggle: click once to keep listening, click again to stop.
-- Optional server-side STT path for local Whisper-based transcription.
-- Browser text-to-speech replies.
+The current assistant includes:
 
-### Urdu, Roman Urdu, and English Intent Handling
+- browser microphone input
+- persistent microphone toggle
+- browser text-to-speech replies
+- optional server-side STT path for local Whisper-based transcription
 
-The assistant includes vocabulary and normalization for common ERP phrases in:
+The voice layer is designed to support both browser-based speech recognition and private local STT services.
+
+### Urdu, Roman Urdu, and English Handling
+
+The assistant includes vocabulary and normalization support for common ERP phrases in:
 
 - English
 - Roman Urdu
 - Urdu script
-- common speech-recognition mistakes such as `receiveables` -> `receivables`
+- common speech-recognition variants
 
 Examples:
 
@@ -91,82 +114,98 @@ pending receivables
 
 ### Permission-Aware Live ERP Answers
 
-The assistant uses Frappe APIs and permission checks instead of raw unrestricted database access. Current live-data foundations include common ERPNext areas such as:
+The assistant uses Frappe APIs and permission-aware access patterns. It is designed so users can only receive answers from data they are allowed to read in ERPNext.
 
-- Sales summaries
-- Purchase summaries
-- Receivables
-- Payables
-- Stock balance
-- Cash/bank balance
-- Account balance
-- Item-wise and customer-wise sales foundations
-- Low-stock summaries
-- CRM, Projects, Assets, Payroll, Attendance, Manufacturing count-style foundations where available
+Current live-data foundations include:
+
+- sales summaries
+- purchase summaries
+- receivables
+- payables
+- stock balance
+- cash/bank balance
+- account balance
+- item-wise and customer-wise sales foundations
+- low-stock summaries
+- selected CRM, Projects, Assets, Payroll, Attendance, and Manufacturing count-style summaries where those modules are available
 
 ### ERPNext Navigation Assistance
 
-The assistant includes navigation resolution for ERPNext screens such as:
+The navigation layer resolves common ERPNext destinations such as:
 
 - DocType lists
-- common ERPNext modules
 - reports
-- filtered list routes for some common workflows
-- business aliases such as customer, supplier, item, sales invoice, purchase invoice, stock ledger, receivables, and payables
+- common ERPNext modules
+- filtered list routes for selected workflows
+- business aliases for customers, suppliers, items, invoices, stock, receivables, and payables
 
 ### Tool Registry and Safety Layer
 
-The assistant is structured around approved tools rather than arbitrary model actions.
+Invoxia AI is structured around approved tools instead of unrestricted model behavior.
 
 Implemented foundations include:
 
-- tool contracts
-- registry pattern
+- assistant tool contracts
+- tool registry pattern
 - permission checks
-- read-only guard foundations
 - rate limits
 - audit logs
 - tool execution logs
-- output row limits
+- bounded output limits
 - subscription-state checks
+- read-only mode foundations
 
-### Local/Private AI Architecture
+The intended safety model is:
 
-The project includes deployment assets for:
+```text
+User request -> intent router -> approved tool -> permission check -> bounded ERPNext action/answer
+```
+
+The LLM should not directly execute arbitrary database operations.
+
+---
+
+## Local and Cloud AI Architecture
+
+The project includes deployment assets and architecture planning for:
 
 - Ollama
 - Qwen local LLM models
 - whisper.cpp server-side STT
 - local/cloud AI service profiles
 
-Recommended local/cloud baseline:
+Recommended privacy-first baseline:
 
 ```text
 ERPNext + Invoxia AI + Ollama + Qwen + Whisper.cpp
 ```
 
-### Licensing and Commercial Controls Foundation
+For local deployments, the target is to keep ERP data, voice processing, and LLM routing inside the client environment whenever possible.
 
-The app includes early-stage foundations for:
+---
+
+## Licensing and Subscription Foundations
+
+The app includes foundations for commercial deployment controls:
 
 - online subscription status
 - signed offline license payloads
 - seven-day grace period policy
-- read-only ERP mode for expired/suspended licenses
-- keeping login, read access, and backup/export access available
+- read-only ERP mode for expired or suspended subscriptions
+- continued login/read/backup-export access in restricted mode
 
-This is intended to avoid destructive or hostage-style subscription enforcement.
+The subscription model is designed to avoid destructive enforcement. Client data should not be deleted, corrupted, or locked behind payment failure.
 
 ---
 
-## Architecture
+## Architecture Overview
 
 ```text
 ERPNext Desk
    |
-   | app_include_js / app_include_css
+   | Frappe app assets
    v
-Invoxia Floating Assistant Widget
+Invoxia AI Floating Widget
    |
    | frappe.call
    v
@@ -176,25 +215,21 @@ Custom Frappe App: nexova_ai
    +-- Urdu/English Vocabulary Normalization
    +-- Tool Registry
    +-- Permission Layer
-   +-- Dynamic Metadata/Query Foundations
+   +-- Dynamic Metadata and Query Foundations
    +-- Live ERP Tools
    +-- Audit and Tool Logs
-   +-- Subscription and Read-Only Guard Foundations
+   +-- Subscription and Read-Only Controls
    |
    +-- Optional Local AI Services
        +-- Ollama / Qwen
        +-- Whisper.cpp
 ```
 
-Core design principle:
-
-> The LLM should not directly control ERPNext. It should select approved tools, and those tools must enforce Frappe permissions, limits, and confirmation rules.
-
 ---
 
-## Dynamic AI Direction
+## Metadata-Driven Direction
 
-The project is moving toward a metadata-driven assistant instead of hard-coding every ERPNext command.
+ERPNext is metadata-driven through DocTypes, fields, reports, roles, and permissions. Invoxia AI is being developed toward a metadata-based assistant architecture so it can cover more ERPNext modules without hard-coding every possible command.
 
 Target flow:
 
@@ -204,104 +239,98 @@ User command
   -> ERPNext metadata reader
   -> approved tool registry
   -> permission-aware query/action executor
-  -> safe response or clarification
+  -> answer, navigation, or clarification
 ```
 
-This approach is designed so the assistant can gradually cover more ERPNext modules without requiring a separate hard-coded command for every DocType.
+This makes the assistant extensible across different ERPNext setups while still keeping safety boundaries in place.
 
 ---
 
-## What Is Implemented vs In Progress
+## Current Implementation Status
 
 ### Implemented Foundations
 
-- Custom Frappe app structure for ERPNext v15
-- Floating Invoxia AI widget inside Desk
-- Text assistant endpoint
-- Voice input UI foundation
-- Browser TTS
+- ERPNext custom app structure
+- floating Invoxia AI Desk widget
+- text assistant endpoint
+- browser voice UI foundation
+- browser text-to-speech support
 - Urdu/Roman Urdu/English vocabulary foundations
-- Permission-aware live data tools
-- Navigation resolver foundations
-- Tool registry pattern
-- Metadata and dynamic query foundations
+- permission-aware live-data tools
+- navigation resolver foundations
+- tool registry pattern
+- metadata and dynamic query foundations
 - Invoxia AI Settings DocType
-- Audit log DocType
-- Tool execution log DocType
-- Rate limiting foundations
-- RAG DocType foundations
-- Local AI deployment assets for Ollama/Qwen and Whisper.cpp
-- Subscription and offline-license foundations
-- Read-only enforcement foundations
-- Documentation for hosting, security, backups, local/cloud modes, and production checklist
-- Automated unit tests for major non-Frappe logic
+- Invoxia AI Audit Log DocType
+- Invoxia AI Tool Execution Log DocType
+- RAG-related DocType foundations
+- rate limit foundations
+- local AI deployment assets
+- online/offline license foundations
+- read-only enforcement foundations
+- automated tests for assistant logic and production-control foundations
 
-### In Progress / Not Yet Production-Complete
+### Active Development Areas
 
-- Full license server deployment and end-to-end billing workflow
-- Full safe CRUD draft + confirmation flow
-- Complete ERPNext-wide navigation coverage
-- Complete dynamic report/filter generation across every ERPNext module
-- Production-grade backup and restore automation validation
-- Full monitoring/error alerting
-- Hardened public demo role and data reset process
-- Mobile voice UX refinement
-- Formal security review
-- Release tagging and staging pipeline
+- full license server production deployment
+- safe CRUD draft and confirmation workflow
+- broader ERPNext navigation coverage
+- broader dynamic report and filter generation
+- backup and restore automation validation
+- monitoring and error alerting
+- stronger mobile voice experience
+- formal security review
+- staging and release pipeline
 
 ---
 
 ## AI Model Strategy
 
-The project is designed to support multiple model providers through settings.
+Invoxia AI is designed to support multiple model providers through settings.
 
 ### Local / Privacy-First
 
-Recommended default:
+Recommended model path:
 
 ```text
-Ollama + Qwen3 8B
+Ollama + Qwen
 ```
 
-For smaller machines:
+Suggested model tiers:
 
-```text
-Qwen3 4B
-```
-
-For stronger local/cloud machines:
-
-```text
-Qwen3 14B or higher
-```
+| Environment | Suggested model |
+| --- | --- |
+| Low-resource local machine | Qwen 3 4B |
+| Standard local server | Qwen 3 8B |
+| Better local/cloud AI server | Qwen 3 14B or higher |
 
 ### Cloud / Higher Accuracy
 
-Potential providers:
+Potential providers include:
 
 - Mistral
 - OpenAI-compatible APIs
 - OpenAI
 
-Cloud models should be used only when the client accepts cloud AI processing. For privacy-sensitive clients, local Ollama + Qwen is preferred.
+Cloud AI should be used only when the client accepts cloud processing. For privacy-sensitive clients, the preferred path is local inference.
 
 ---
 
-## Security and Privacy Principles
+## Security Principles
 
-- ERPNext core is not modified.
-- Frappe core is not patched.
-- The assistant uses Frappe APIs and permission checks.
-- Raw unrestricted SQL is avoided.
-- Local AI deployment is supported for privacy-sensitive clients.
-- Client business data should remain inside the client site/database.
-- Assistant actions should be audited.
-- Future write operations should require explicit preview and confirmation.
-- Expired subscriptions should not delete, corrupt, or lock client data.
+- ERPNext core remains unchanged.
+- Frappe core remains unchanged.
+- Normal ERPNext permissions remain the data boundary.
+- Assistant tools should use Frappe APIs and bounded queries.
+- Unrestricted raw SQL is avoided.
+- Write operations should require explicit preview and confirmation.
+- Assistant actions should be logged.
+- Local deployments should keep client data on the client machine or LAN.
+- Subscription enforcement should not destroy or lock client data.
 
 ---
 
-## Example Use Cases
+## Example Commands
 
 ### Navigation
 
@@ -312,7 +341,7 @@ stock ledger report open karo
 supplier list dikhao
 ```
 
-### Live Data Questions
+### Live ERP Questions
 
 ```text
 today's sales
@@ -323,7 +352,7 @@ stock balance for ITEM-001
 low stock items dikhao
 ```
 
-### Voice-Oriented Commands
+### Voice-Oriented Usage
 
 ```text
 customer list kholo
@@ -345,7 +374,7 @@ bench --site your-site.local clear-cache
 bench restart
 ```
 
-For Docker/custom-image deployments, include this app in your Frappe custom image build through `apps.json`, then run migrate/build/clear-cache on the target site.
+For Docker/custom-image deployments, include the app in the Frappe custom image build through `apps.json`, then run migrate/build/clear-cache on the target site.
 
 ---
 
@@ -356,17 +385,13 @@ python -m compileall nexova_ai
 python -m unittest discover -s tests
 ```
 
-The current test suite focuses on app structure, assistant logic, production controls, intent handling, rate limiting, license decisions, and safety foundations that can be tested outside a full Frappe runtime.
-
 ---
 
-## Repository Notes
-
-This repository is a portfolio and product-development codebase. Some production concerns are intentionally documented as roadmap/foundation work rather than claimed as finished.
+## Repository Safety
 
 Do not commit:
 
-- ERPNext site backups
+- site backups
 - database dumps
 - `.env` files
 - private keys
@@ -377,37 +402,12 @@ Do not commit:
 
 ---
 
-## Why This Project Matters
+## Status
 
-Invoxia AI demonstrates applied AI engineering in a real enterprise software environment:
-
-- AI product design beyond a simple chatbot
-- ERPNext/Frappe integration
-- tool-based AI architecture
-- local/private LLM deployment
-- voice assistant workflow
-- multilingual command handling
-- permissions and safety boundaries
-- Docker/cloud/local deployment thinking
-- subscription and commercial operations design
-
-The project is especially relevant for roles in:
-
-- Applied AI Engineering
-- AI Engineering
-- Forward Deployed Engineering
-- AI Product Engineering
-- Enterprise Automation
-- LLM Tooling and Agents
+Invoxia AI is under active development. The current version is an early product foundation with working ERPNext assistant features and ongoing work toward production-grade licensing, CRUD safety, backup automation, monitoring, and broader ERPNext coverage.
 
 ---
 
 ## License
 
 See `LICENSE`.
-
----
-
-## Status
-
-Invoxia AI is under active development. It is currently best described as a strong early product foundation and portfolio-grade applied AI system, not a fully audited production SaaS release.
