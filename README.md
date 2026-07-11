@@ -4,6 +4,8 @@
 
 It is implemented as a custom Frappe app on top of ERPNext. ERPNext core remains unchanged.
 
+> This public repository is a product/architecture showcase. The implementation source is intentionally not published here.
+
 | Area | Details |
 | --- | --- |
 | Platform | ERPNext / Frappe v15 |
@@ -54,6 +56,16 @@ The product is designed for two commercial deployment models:
 - business data remains on the client machine or network
 - local AI services can be used for privacy-sensitive clients
 - suitable for clients who do not want cloud exposure
+
+---
+
+## What It Proves
+
+- A real ERPNext/Frappe system can be extended with an AI assistant without editing ERPNext core.
+- Natural-language and voice-oriented ERP commands can route into approved tools instead of unrestricted model-generated database operations.
+- Live ERP answers can respect Frappe permissions, output limits, and audit boundaries.
+- Local/private AI deployment paths are possible for clients who do not want business data sent to external AI providers.
+- AI features can be designed with commercial controls while preserving client data access and backup/export safety.
 
 ---
 
@@ -375,6 +387,20 @@ bench --site your-site.local migrate
 bench --site your-site.local clear-cache
 bench restart
 ```
+
+---
+
+## Related AI Systems
+
+| System | Purpose | Links |
+| --- | --- | --- |
+| Invoxia AI for ERPNext | Frappe/ERPNext assistant layer for navigation, voice input foundations, and live ERP answers. | [Live](https://invoxia.sohaib.systems/) · [Repo](https://github.com/HafizMuhammadSohaibUmar/InvoxiaAI-ERPNext) |
+| LeadPilot AI Voice Agent | Inbound phone agent for call qualification, emergency detection, and lead logging. | [Live](https://leadpilotai.sohaib.systems/) · [Repo](https://github.com/HafizMuhammadSohaibUmar/LeadPilotAI) |
+| Missed Call Text-Back AI Agent | SMS recovery and qualification after no-answer or busy calls. | [Live](https://missed-call-text-back-ai-agent.sohaib.systems/demo) · [Repo](https://github.com/HafizMuhammadSohaibUmar/Missed-Call-Text-Back-AI-Agent) |
+| Outbound Follow-Up AI Agent | Estimate, no-show, re-engagement, and seasonal follow-up campaigns. | [Live](https://outbound-followup-ai-agent.sohaib.systems/demo) · [Repo](https://github.com/HafizMuhammadSohaibUmar/Outbound-Follow-Up-AI-Agent) |
+| AI Auto Review Request Agent | Sentiment-aware post-job review and private feedback routing. | [Live](https://ai-review-agent.sohaib.systems/demo) · [Repo](https://github.com/HafizMuhammadSohaibUmar/AI-Auto-Review-Request-Agent) |
+| Web Chat Lead Qualifier Agent | Embeddable RAG chat widget for contractor websites. | [Live](https://web-chat-lead-qualifier-agent.sohaib.systems/demo) · [Repo](https://github.com/HafizMuhammadSohaibUmar/Web-Chat-Lead-Qualifier-Agent) |
+| Personal AI Agent | Local task, planning, and calendar assistant with LangGraph tools. | [Live](https://personal-ai-agent.sohaib.systems/) · [Repo](https://github.com/HafizMuhammadSohaibUmar/Personal-AI-Agent) |
 
 For Docker/custom-image deployments, include the app in the Frappe custom image build through `apps.json`, then run migrate/build/clear-cache on the target site.
 
