@@ -96,13 +96,13 @@ The assistant includes a voice interaction foundation:
 
 The voice layer is designed so cloud clients can use browser/cloud services where acceptable, while privacy-sensitive clients can move toward local speech-to-text.
 
-### Urdu, Roman Urdu, and English Understanding
+### English, Roman Urdu, and Urdu Understanding
 
-The assistant includes vocabulary and normalization for common ERP phrases in:
+The assistant includes vocabulary and normalization for common ERP phrases across:
 
 - English
 - Roman Urdu
-- Urdu script
+- Urdu script support in the language layer
 - common speech-recognition variants
 
 Examples:
@@ -112,7 +112,7 @@ customer list kholo
 stock balance batao
 kitne customers hain
 pending receivables
-آج کی sales
+aaj ki sales
 ```
 
 ---
@@ -313,7 +313,7 @@ Custom Frappe App: nexova_ai
 
 ## Current Implementation Status
 
-### Implemented Foundations
+### Implemented
 
 - ERPNext custom app structure
 - floating Invoxia AI Desk widget
@@ -336,7 +336,7 @@ Custom Frappe App: nexova_ai
 - read-only enforcement foundations
 - automated tests for assistant logic and production-control foundations
 
-### Active Development Areas
+### Planned / In Progress
 
 - full license server production deployment
 - safe CRUD draft and confirmation workflow
@@ -406,7 +406,7 @@ Do not commit:
 
 ## Status
 
-Invoxia AI is under active development. The current version is an early product foundation with working ERPNext assistant features and ongoing work toward production-grade licensing, CRUD safety, backup automation, monitoring, and broader ERPNext coverage.
+Invoxia AI is under active development. The current version is an early product foundation with working ERPNext assistant features. Production-grade licensing, CRUD safety, backup automation, monitoring, and broader ERPNext coverage are planned and in active development.
 
 ---
 
