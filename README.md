@@ -394,8 +394,6 @@ Custom Frappe App: nexova_ai
 
 This repository is intentionally limited to the public product and architecture description. The working Frappe app source, private deployment files, database material, and client/runtime configuration are not published here.
 
-The live demo is hosted separately on Azure. If the demo URL is unavailable, the relevant operational checks are Azure custom-domain binding, TLS/certificate status, App Service or container logs, and ERPNext/Frappe worker availability.
-
 ---
 
 ## Status
@@ -403,8 +401,3 @@ The live demo is hosted separately on Azure. If the demo URL is unavailable, the
 Invoxia AI is under active development. The current version is an early product foundation with working ERPNext assistant features. Production-grade licensing, CRUD safety, backup automation, monitoring, and broader ERPNext coverage are planned and in active development.
 
 ---
-
-## License
-
-See `LICENSE`.
-
