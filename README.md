@@ -21,7 +21,7 @@ It is implemented as a custom Frappe app on top of ERPNext. ERPNext core remains
 
 A hosted demo is available at:
 
-**https://invoxia.sohaib.systems**
+**https://invoxia.sohaib.systems/app/accounting**
 
 Demo login:
 
